@@ -1,11 +1,11 @@
 # github-actions-library
 
-### This is to automate the CI operations for the code repos based on their build type. As of now this repo performs operations `build, unittest, static code analysis and artifact store`.
+This is to automate the CI operations for the code repos based on their build type. As of now this repo performs operations `build, unittest, static code analysis and artifact store`.
 
-### It requires two files, one is config.yaml(Its default name, if the name is different then it can be passed as parameter) and one github workflow file.
+It requires two files, one is config.yaml(Its default name, if the name is different then it can be passed as parameter) and one github workflow file.
 
 # Cofiguration yaml file
-### this file needs to be present at the root of the repo. Example:
+This file needs to be present at the root of the repo. Example:
 ```
 build_type: node
 static_code_analysis: sonar
@@ -34,7 +34,7 @@ branches:
 
 
 # Github workflow file
-### File needs to be present under `.github/workflows` folder. File name for ex. node_action.yaml.
+File needs to be present under `.github/workflows` folder. File name for ex. node_action.yaml.
 ```
 name: Github Actions
 on: 
