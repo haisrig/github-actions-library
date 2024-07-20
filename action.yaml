@@ -1,0 +1,30 @@
+name: Handle build actions
+description: Perform build action based on the build type.
+inputs:
+  node_version:
+    description: NodeJS version
+    default: 18.20.3
+  file_name:
+    description: Name of the config file. If not specified it will check for "config.yaml" file by default.
+    default: "config.yaml"
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Read YAML File
+      uses: haisrig/read-yaml-action@main
+      id: read_action
+      with:
+          branch_name: "${GITHUB_REF_NAME}"
+          file_name: "${{inputs.file_name}}"
+    - name: perform build
+      if: steps.read_action.outputs.build_type == 'node'
+      uses: haisrig/node-build-action@main
+      with:          
+        build: ${{steps.read_action.outputs.build || 'false'}}
+        unit_test: ${{steps.read_action.outputs.unit_test || 'false'}}
+        code_analysis: ${{steps.read_action.outputs.code_analysis || 'false'}}
+        store_artifact: ${{steps.read_action.outputs.store_artifact || 'false'}}
+        static_code_analysis: ${{steps.read_action.outputs.static_code_analysis || 'sonar'}}
+        node_version: ${{inputs.node_version}}
