@@ -28,3 +28,12 @@ runs:
         store_artifact: ${{steps.read_action.outputs.store_artifact || 'false'}}
         static_code_analysis: ${{steps.read_action.outputs.static_code_analysis || 'sonar'}}
         node_version: ${{inputs.node_version}}
+    - name: perform build
+      if: steps.read_action.outputs.build_type == 'maven'
+      uses: haisrig/maven-build-action@feature/build-action
+      with:
+        build: ${{steps.read_action.outputs.build || 'false'}}        
+        code_analysis: ${{steps.read_action.outputs.code_analysis || 'false'}}
+        store_artifact: ${{steps.read_action.outputs.store_artifact || 'false'}}
+        static_code_analysis: ${{steps.read_action.outputs.static_code_analysis || 'sonar'}}
+        javaversion: ${{inputs.java_version}}
