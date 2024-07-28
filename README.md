@@ -23,7 +23,7 @@ branches:
     code_analysis: true
     store_artifact: true
 ```
-- build_type: Tells how to build the code. Currently only `node` build type is supported.
+- build_type: Tells how to build the code. Currently only `node, maven` build type is supported.
 - static_code_analysis: Tells static code analysis tool to be used. Either `lint` or `sonar`.
 - branches:
     - type: Type of the git branch. Supports `feature, develop, release and prod`.
